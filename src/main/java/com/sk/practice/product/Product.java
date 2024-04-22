@@ -1,5 +1,7 @@
 package com.sk.practice.product;
 
+import java.time.LocalDateTime;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -25,12 +27,14 @@ public class Product {
     private Long id;
     private String name;
     private Double price;
+    private LocalDateTime registerTime;
     private SellType sellType;
 
     @Builder
-    private Product(String name, Double price, SellType sellType){
+    private Product(String name, Double price, LocalDateTime registerTime,  SellType sellType){
         this.name = name;
         this.price = price;
+        this.registerTime = registerTime;
         this.sellType = sellType;
     }
 }

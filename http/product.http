@@ -1,0 +1,12 @@
+POST http://localhost:8080/products HTTP/1.1
+content-type: application/json
+
+{
+    "name": "kim",
+    "price": "200000",
+    "registerTime": "2024-01-31 15:05:59",
+    "sellType" : "SELLING"
+}
+
+###
+GET http://localhost:8080/products HTTP/1.1

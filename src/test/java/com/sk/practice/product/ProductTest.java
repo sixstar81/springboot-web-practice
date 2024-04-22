@@ -1,5 +1,7 @@
 package com.sk.practice.product;
 
+import java.time.LocalDateTime;
+
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
@@ -14,7 +16,11 @@ public class ProductTest {
 
     @Test
     void saveProduct(){
-        Product product = Product.builder().name("radio").price(100.0).sellType(SellType.SELLING).build();
+        Product product = Product.builder()
+                .name("radio")
+                .price(100.0)
+                .registerTime(LocalDateTime.now())
+                .sellType(SellType.SELLING).build();
         em.persist(product);
 
         Product result = em.find(Product.class, product.getId());
