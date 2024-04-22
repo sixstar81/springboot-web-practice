@@ -2,7 +2,7 @@ POST http://localhost:8080/products HTTP/1.1
 content-type: application/json
 
 {
-    "name": "kim",
+    "name": "pak",
     "price": "200000",
     "registerTime": "2024-01-31 15:05:59",
     "sellType" : "SELLING"
@@ -10,3 +10,6 @@ content-type: application/json
 
 ###
 GET http://localhost:8080/products HTTP/1.1
+###
+
+GET http://localhost:8080/products/1 HTTP/1.1

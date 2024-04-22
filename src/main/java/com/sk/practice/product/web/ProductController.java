@@ -1,8 +1,12 @@
 package com.sk.practice.product.web;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -11,8 +15,8 @@ import com.sk.practice.product.ProductRepository;
 import com.sk.practice.product.ProductRequest;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
+
+
 
 
 
@@ -26,6 +30,11 @@ public class ProductController {
     @GetMapping
     public List<Product> allProducts() {
         return productRepository.findAll();
+    }
+
+    @GetMapping("{id}")
+    public Optional<Product> getMethodName(@PathVariable Long id) {
+        return productRepository.findById(id);
     }
 
     @PostMapping
