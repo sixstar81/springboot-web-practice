@@ -17,23 +17,27 @@ import com.sk.practice.product.SellType;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @WebMvcTest(controllers = ProductController.class)
 public class ProductControllerTest {
 
-    @Autowired MockMvc mockMvc;
-    @Autowired ObjectMapper objectMapper;
-    @MockBean ProductRepository productRepository;
+    @Autowired
+    MockMvc mockMvc;
+    @Autowired
+    ObjectMapper objectMapper;
+    @MockBean
+    ProductRepository productRepository;
 
     @Test
     void savedProduct() throws Exception {
         ProductRequest productRequest = new ProductRequest("kim", 1000L, LocalDateTime.now(), SellType.SELLING);
         mockMvc.perform(
-                post("/products")
+                        post("/products")
                         .content(objectMapper.writeValueAsString(productRequest))
                         .contentType(MediaType.APPLICATION_JSON)
-        ).andDo(print())
-                .andExpect(status().isOk());
+                ).andDo(print())
+                 .andExpect(status().isOk());
     }
 }

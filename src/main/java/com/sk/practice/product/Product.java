@@ -2,11 +2,7 @@ package com.sk.practice.product;
 
 import java.time.LocalDateTime;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.SequenceGenerator;
+import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
@@ -28,6 +24,7 @@ public class Product {
     private String name;
     private Double price;
     private LocalDateTime registerTime;
+    @Enumerated(EnumType.STRING)
     private SellType sellType;
 
     @Builder
