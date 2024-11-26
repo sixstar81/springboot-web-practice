@@ -1,4 +1,4 @@
-package com.sk.practice.issue;
+package com.sk.practice.issue.domain;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
