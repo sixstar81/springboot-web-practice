@@ -6,7 +6,6 @@ import lombok.NoArgsConstructor;
 import lombok.AccessLevel;
 import lombok.Builder;
 
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,7 +15,7 @@ import com.sk.practice.common.BaseTimeEntity;
 @Table(name = "issues")
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class Issue extends BaseTimeEntity{
+public class Issue extends BaseTimeEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -27,8 +26,8 @@ public class Issue extends BaseTimeEntity{
     @Column(columnDefinition = "TEXT")
     private String content;
 
-    @Column(nullable = false)
-    private String author;
+    @Column(name = "author_id", nullable = false)
+    private String authorId;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "issue_type_id", nullable = false)
@@ -38,15 +37,15 @@ public class Issue extends BaseTimeEntity{
     private List<Attachment> attachments = new ArrayList<>();
 
     @Builder
-    private Issue(String title, String content, String author, 
+    private Issue(String title, String content, String authorId, 
                  IssueType issueType, String status) {
         validateTitle(title);
-        validateAuthor(author);
+        validateAuthorId(authorId);
         validateIssueType(issueType);
         
         this.title = title;
         this.content = content;
-        this.author = author;
+        this.authorId = authorId;
         this.issueType = issueType;
     }
 
@@ -59,8 +58,8 @@ public class Issue extends BaseTimeEntity{
         }
     }
 
-    private void validateAuthor(String author) {
-        if (author == null || author.trim().isEmpty()) {
+    private void validateAuthorId(String authorId) {
+        if (authorId == null || authorId.trim().isEmpty()) {
             throw new IllegalArgumentException("작성자는 필수 입력값입니다.");
         }
     }
