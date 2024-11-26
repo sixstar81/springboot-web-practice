@@ -1,4 +1,4 @@
-package com.sk.practice.issue;
+package com.sk.practice.issue.domain;
 
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -10,11 +10,13 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.sk.practice.common.BaseTimeEntity;
+
 @Entity
 @Table(name = "issues")
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class Issue {
+public class Issue extends BaseTimeEntity{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -25,21 +27,12 @@ public class Issue {
     @Column(columnDefinition = "TEXT")
     private String content;
 
-    @Column(name = "created_at", nullable = false, updatable = false)
-    private LocalDateTime createdAt;
-
-    @Column(name = "update_time")
-    private LocalDateTime updateTime;
-
     @Column(nullable = false)
     private String author;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "issue_type_id", nullable = false)
     private IssueType issueType;
-
-    @Column
-    private String status;
 
     @OneToMany(mappedBy = "issue", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Attachment> attachments = new ArrayList<>();
@@ -55,9 +48,6 @@ public class Issue {
         this.content = content;
         this.author = author;
         this.issueType = issueType;
-        this.status = status != null ? status : "OPEN";
-        this.createdAt = LocalDateTime.now();
-        this.updateTime = LocalDateTime.now();
     }
 
     private void validateTitle(String title) {

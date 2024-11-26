@@ -1,4 +1,4 @@
-package com.sk.practice.issue; 
+package com.sk.practice.issue.domain; 
 
 import org.springframework.util.StringUtils;
 
@@ -18,7 +18,7 @@ import lombok.NoArgsConstructor;
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class IssueType {
-    
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -37,4 +37,4 @@ public class IssueType {
             throw new IllegalArgumentException("이슈 타입 이름은 필수입니다.");
         }
     }
-} 
+}
