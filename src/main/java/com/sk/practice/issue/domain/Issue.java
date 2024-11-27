@@ -79,6 +79,10 @@ public class Issue extends BaseTimeEntity {
         this.attachments.remove(attachment);
         attachment.setIssue(null);
     }
+
+    public void update(Issue updateIssue) {
+        this.title = updateIssue.title;
+        this.content = updateIssue.content;
+        this.issueType = updateIssue.issueType;
+    }
 }    
-    
-    

@@ -1,5 +1,7 @@
 package com.sk.practice.member.controller;
 
+import com.sk.practice.member.controller.dto.MemberRequest;
+import com.sk.practice.member.controller.dto.MemberResponse;
 import com.sk.practice.member.domain.MemberService;
 
 import io.swagger.v3.oas.annotations.Operation;
@@ -10,7 +12,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-@Tag(name = "회원관리", description = "Member API")
+@Tag(name = "회원관리", description = "Member API")
 @RestController
 @RequestMapping("/api/members")
 @RequiredArgsConstructor
