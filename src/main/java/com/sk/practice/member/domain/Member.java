@@ -58,7 +58,7 @@ public class Member extends BaseTimeEntity {
     }
 
     private void validateName(String name){
-        if(StringUtils.hasText(name)){
+        if(!StringUtils.hasText(name)){
             throw new IllegalArgumentException("이름은 필수 입니다.");
         }
     }
