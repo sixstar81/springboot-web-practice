@@ -18,9 +18,6 @@ public interface IssueRepository extends JpaRepository<Issue, Long> {
     // 작성자별 페이징 조회
     Page<Issue> findByAuthorId(String authorId, Pageable pageable);
 
-    // 이슈 타입별 페이징 조회
-    Page<Issue> findByIssueType(IssueType issueType, Pageable pageable);
-
     // 키워드 검색 페이징 조회
     @Query("SELECT i FROM Issue i WHERE i.title LIKE %:keyword% OR i.content LIKE %:keyword%")
     Page<Issue> searchByKeyword(@Param("keyword") String keyword, Pageable pageable);

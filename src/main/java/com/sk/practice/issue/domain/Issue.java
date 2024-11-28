@@ -31,24 +31,23 @@ public class Issue extends BaseTimeEntity {
     @Column(name = "author_id", nullable = false)
     private String authorId;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "issue_type_id", nullable = false)
-    private IssueType issueType;
+    @Column(name = "issue_type_id")
+    private Long issueTypeId;
 
     @OneToMany(mappedBy = "issue", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Attachment> attachments = new ArrayList<>();
 
     @Builder
     private Issue(String title, String content, String authorId, 
-                 IssueType issueType, String status) {
+                 Long issueTypeId, String status) {
         validateTitle(title);
         validateAuthorId(authorId);
-        validateIssueType(issueType);
+        validateIssueTypeId(issueTypeId);
         
         this.title = title;
         this.content = content;
         this.authorId = authorId;
-        this.issueType = issueType;
+        this.issueTypeId = issueTypeId;
     }
 
     private void validateTitle(String title) {
@@ -66,8 +65,8 @@ public class Issue extends BaseTimeEntity {
         }
     }
 
-    private void validateIssueType(IssueType issueType) {
-        if (issueType == null) {
+    private void validateIssueTypeId(Long issueTypeId) {
+        if (issueTypeId == null) {
             throw new IllegalArgumentException("이슈 타입은 필수 입력값입니다.");
         }
     }
@@ -90,6 +89,6 @@ public class Issue extends BaseTimeEntity {
     public void update(Issue updateIssue) {
         this.title = updateIssue.title;
         this.content = updateIssue.content;
-        this.issueType = updateIssue.issueType;
+        this.issueTypeId = updateIssue.issueTypeId;
     }
 }    

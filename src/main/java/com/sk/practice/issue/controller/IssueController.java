@@ -23,7 +23,6 @@ public class IssueController {
 
     @PostMapping(consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public ResponseEntity<Long> createIssue(@ModelAttribute IssueRequest request) throws IOException {
-        
 
         List<Attachment> saveFiles = fileService.saveFiles(request.getFiles());
 
@@ -34,6 +33,7 @@ public class IssueController {
         );
 
         
+
         Long issueId = issueService.createIssue(entity);
 
         return ResponseEntity.ok(issueId);
