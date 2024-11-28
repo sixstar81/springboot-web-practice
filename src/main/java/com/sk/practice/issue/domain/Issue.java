@@ -70,6 +70,11 @@ public class Issue extends BaseTimeEntity {
         }
     }
 
+    public void addAttachments(List<Attachment> attachments) {
+        this.attachments.addAll(attachments);
+        attachments.forEach(attachment -> attachment.setIssue(this));
+    }
+
     public void addAttachment(Attachment attachment) {
         this.attachments.add(attachment);
         attachment.setIssue(this);
