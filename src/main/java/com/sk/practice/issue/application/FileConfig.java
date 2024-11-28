@@ -6,9 +6,9 @@ import lombok.Getter;
 import lombok.Setter;
 
 @Configuration
-@ConfigurationProperties(prefix = "file")
+@ConfigurationProperties(prefix = "file.upload")
 @Getter
 @Setter
 public class FileConfig {
-    private String uploadPath;
+    private String path;
 }

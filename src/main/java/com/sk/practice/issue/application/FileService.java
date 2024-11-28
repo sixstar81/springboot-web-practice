@@ -3,13 +3,10 @@ package com.sk.practice.issue.application;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.sk.practice.issue.application.dto.FileInfo;
 import com.sk.practice.issue.domain.Attachment;
-import com.sk.practice.issue.domain.Issue;
 
 import lombok.RequiredArgsConstructor;
 
-import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -24,12 +21,14 @@ import java.util.UUID;
 @RequiredArgsConstructor
 public class FileService {
 
-    private final String uploadPath;
+    private final FileConfig uploadPath;
 
     public List<Attachment> saveFiles(List<MultipartFile> files) throws IOException {
         if (files == null || files.isEmpty()) {
             return Collections.emptyList();
         }
+
+        System.out.println("uploadPath: " + uploadPath.getPath());
 
         List<Attachment> attachments = new ArrayList<>();
         
@@ -37,7 +36,7 @@ public class FileService {
             if (!file.isEmpty()) {
                 String originalFileName = file.getOriginalFilename();
                 String storedFileName = UUID.randomUUID().toString() + "_" + originalFileName;
-                Path filePath = Paths.get(uploadPath, storedFileName);
+                Path filePath = Paths.get(uploadPath.getPath(), storedFileName);
                 
                 // 파일 저장
                 Files.copy(file.getInputStream(), filePath, StandardCopyOption.REPLACE_EXISTING);

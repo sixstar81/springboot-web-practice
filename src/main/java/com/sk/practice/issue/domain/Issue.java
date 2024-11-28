@@ -3,6 +3,7 @@ package com.sk.practice.issue.domain;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 import lombok.AccessLevel;
 import lombok.Builder;
 
@@ -13,6 +14,7 @@ import com.sk.practice.common.BaseTimeEntity;
 
 @Entity
 @Table(name = "issues")
+@ToString
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Issue extends BaseTimeEntity {

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>이슈 생성</title>
+</head>
+<body>
+    <h2>이슈 생성 테스트</h2>
+    
+    <form action="/api/issues" method="post" enctype="multipart/form-data">
+        <div>
+            <label for="title">제목:</label>
+            <input type="text" id="title" name="title" required>
+        </div>
+        
+        <div>
+            <label for="content">내용:</label>
+            <textarea id="content" name="content" required></textarea>
+        </div>
+
+        
+        <div>
+            <label for="files">파일 첨부:</label>
+            <input type="file" id="files" name="files" multiple>
+        </div>
+        
+        <button type="submit">이슈 생성</button>
+    </form>
+
+    <script>
+    document.querySelector('form').addEventListener('submit', async (e) => {
+        e.preventDefault();
+        
+        const formData = new FormData(e.target); // 폼의 모든 데이터를 자동으로 추가
+        const files = document.getElementById('files').files;
+
+    // 파일이 선택되지 않았을 때 검증
+        if (files.length === 0) {
+            alert('파일을 선택해주세요.');
+            return;
+        }
+        for (const [key, value] of formData.entries()) {
+                console.log(`${key}:`, value);
+        }
+        try {
+            const response = await fetch('/api/issues', {
+                method: 'POST',
+                body: formData
+            });
+            
+            if (response.ok) {
+                const issueId = await response.json();
+                alert(`이슈가 생성되었습니다. (ID: ${issueId})`);
+            } else {
+                alert('이슈 생성에 실패했습니다.');
+            }
+        } catch (error) {
+            console.error('Error:', error);
+            alert('오류가 발생했습니다.');
+        }
+    });
+    </script>
+</body>
+</html>
