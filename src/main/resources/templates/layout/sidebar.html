@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:fragment="sidebar">
+<head>
+    <style>
+        .sidebar {
+            width: 260px;
+            background-color: #1a1a1a;
+            color: #fff;
+            height: 100vh;
+            padding: 20px 0;
+        }
+
+        .menu-item {
+            padding: 8px 24px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            color: #a0a0a0;
+            text-decoration: none;
+        }
+
+        .menu-item:hover {
+            background-color: rgba(255, 255, 255, 0.08);
+            color: #fff;
+        }
+
+        .menu-item.active {
+            background-color: rgba(255, 255, 255, 0.12);
+            color: #fff;
+        }
+
+        .menu-section {
+            margin-top: 16px;
+        }
+
+        .menu-section-title {
+            padding: 8px 24px;
+            font-size: 0.875rem;
+            color: #a0a0a0;
+            font-weight: 500;
+        }
+
+        .submenu {
+            margin-left: 16px;
+        }
+    </style>
+</head>
+<body>
+    <div class="sidebar">
+        <div class="menu-section">
+            <div class="menu-section-title">Getting started</div>
+            <a href="/overview" class="menu-item">Overview</a>
+            <a href="/installation" class="menu-item">Installation</a>
+        </div>
+
+        <div class="menu-section">
+            <div class="menu-section-title">Development</div>
+            <a href="/components" class="menu-item">Components</a>
+        </div>
+
+        <div class="menu-section">
+            <div class="menu-section-title">Support</div>
+            <a href="/faq" class="menu-item">FAQs</a>
+            <a href="/platforms" class="menu-item">Supported platforms</a>
+        </div>
+    </div>
+</body>
+</html>
