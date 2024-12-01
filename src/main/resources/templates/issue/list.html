@@ -4,31 +4,45 @@
       layout:decorate="~{layout/main}"
       layout:fragment="content">
 
-    <div>
-        <div>
-            <h2>이슈 목록</h2>
-            
-            <table class="table table-hover">
-                <thead class="table-light">
+    <div class="p-6">
+        <!-- 헤더 섹션 -->
+        <div class="mb-6 flex justify-between items-center">
+            <h2 class="text-2xl font-bold text-gray-800">이슈 목록</h2>
+            <a href="/issues/create" class="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors">
+                새 이슈 등록
+            </a>
+        </div>
+
+        <!-- 테이블 섹션 -->
+        <div class="bg-white rounded-lg shadow-sm overflow-hidden">
+            <table class="min-w-full divide-y divide-gray-200">
+                <thead class="bg-gray-50">
                     <tr>
-                        <th>제목</th>
-                        <th>작성자</th>
-                        <th>이슈유형</th>
-                        <th>등록일</th>
+                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">제목</th>
+                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">작성자</th>
+                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">이슈유형</th>
+                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">등록일</th>
                     </tr>
                 </thead>
-                <tbody>
-                    <tr th:each="issue : ${issues}">
-                        <td>
+                <tbody class="bg-white divide-y divide-gray-200">
+                    <tr th:each="issue : ${issues}" class="hover:bg-gray-50 transition-colors">
+                        <td class="px-6 py-4">
                             <a th:href="@{/issues/{id}(id=${issue.id})}" 
-                               th:text="${issue.title}">이슈 제목</a>
+                               th:text="${issue.title}"
+                               class="text-blue-600 hover:text-blue-800 hover:underline">이슈 제목</a>
                         </td>
-                        <td th:text="${issue.author}">작성자</td>
-                        <td th:text="${issue.type}">이슈유형</td>
-                        <td th:text="${#temporals.format(issue.createdAt, 'yyyy-MM-dd HH:mm')}">2024-03-21</td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900" th:text="${issue.author}">작성자</td>
+                        <td class="px-6 py-4 whitespace-nowrap">
+                            <span th:text="${issue.type}"
+                                  class="px-2 py-1 text-sm rounded-full bg-gray-100 text-gray-800">이슈유형</span>
+                        </td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500" 
+                            th:text="${#temporals.format(issue.createdAt, 'yyyy-MM-dd HH:mm')}">2024-03-21</td>
                     </tr>
                     <tr th:if="${#lists.isEmpty(issues)}">
-                        <td colspan="4" class="text-center">등록된 이슈가 없습니다.</td>
+                        <td colspan="4" class="px-6 py-10 text-center text-gray-500">
+                            등록된 이슈가 없습니다.
+                        </td>
                     </tr>
                 </tbody>
             </table>
