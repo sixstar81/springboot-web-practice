@@ -20,18 +20,6 @@ import lombok.RequiredArgsConstructor;
 public class IssueViewController {
 
     private final IssueService issueService;
-    
-    @GetMapping
-    public String listIssues(Model model) {
-        List<Issue> issues = issueService.findAllIssues();
-        List<IssueResponse> issueResponses = issues.stream()
-                .map(issue -> new IssueResponse(issue.getId(), issue.getTitle(), issue.getAuthorId(), issue.getIssueTypeId(), issue.getCreatedAt()))
-                .collect(Collectors.toList());
-        model.addAttribute("issues", issueResponses);
-        //Thymeleaf 의 fragment 기능을 사용하여 부분 템플릿 삽입
-        model.addAttribute("content", "issue/list :: content");
-        return "layout/main";
-    }
 
     @GetMapping("list")
     public String listIssues2(Model model) {
@@ -40,7 +28,11 @@ public class IssueViewController {
                 .map(issue -> new IssueResponse(issue.getId(), issue.getTitle(), issue.getAuthorId(), issue.getIssueTypeId(), issue.getCreatedAt()))
                 .collect(Collectors.toList());
         model.addAttribute("issues", issueResponses);
-        //Thymeleaf 의 fragment 기능을 사용하여 부분 템플릿 삽입
         return "issue/list";
+    }
+
+    @GetMapping("register")
+    public String registerIssue(Model model) {
+        return "issue/register";
     }
 }
